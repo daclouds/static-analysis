@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-
 /**
  * -- ---------- --------------------------------------------------------- -- PGM 이름 : Entity -- PGM 내용 : VO를 담당할 객체 --
  * ---------- ---------------------------------------------------------
@@ -67,7 +66,6 @@ public class RecursiveLoop extends HashMap {
 			this.setValue(new StringBuffer(md.getColumnName(i)).append(iIndex).toString(), rs.getString(i));
 		}
 	}
-
 
 	/**
 	 * DWR 이용시 파라메터로 받는 Map을 Entity에 바인딩 시킨다. - 명준민

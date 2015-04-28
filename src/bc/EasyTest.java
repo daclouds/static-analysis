@@ -22,19 +22,19 @@ public class EasyTest {
 
 	@Test
 	public void testToArray() throws Exception {
-//		given
+		// given
 		final Collection<String> fruits = new ArrayList<String>();
 		fruits.add("apple");
 		fruits.add("banana");
 		fruits.add("cherry");
 		assertArrayEquals(new String[] { "apple", "banana", "cherry" }, Easy.toStringArray(fruits));
 	}
-	
+
 	@Test
 	public void testToBigDecimal() throws Exception {
 		assertEquals(BigDecimal.valueOf(3.14), Easy.toBigDecimal(3.14));
 	}
-	
+
 	@Test
 	public void testPlusOne() throws Exception {
 		assertEquals(2, Easy.plusOne(BigDecimal.ONE));

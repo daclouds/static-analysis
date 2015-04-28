@@ -14,28 +14,27 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-
 public class ValueIsNull {
-	
-	public void logInWrite(String fileName, String userId, String userIp){
-		
-		
+
+	public void logInWrite(String fileName, String userId, String userIp) {
+
 		// file 객체 생성
 		File inputFile = new File(fileName);
-		
-		if(!inputFile.isFile()){
+
+		if (!inputFile.isFile()) {
 			System.out.println("파일 없으므로 생성");
 			try {
 				FileWriter fw = new FileWriter(inputFile);
 				fw.write("");
-				fw.flush();fw.close();
+				fw.flush();
+				fw.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		
+
 		File outputFile = new File(fileName + ".temp");
 
 		FileInputStream fileInputStream = null;
@@ -61,8 +60,8 @@ public class ValueIsNull {
 
 			// 원본 파일에서 한라인씩 읽는다.
 			while ((line = bufferedReader.readLine()) != null) {
-				
-				if(line.toString().equals("")){
+
+				if (line.toString().equals("")) {
 					continue;
 				}
 
@@ -74,37 +73,35 @@ public class ValueIsNull {
 
 				// 유저의 기록이 있는 Line 캐치
 				if (userId.equals(tmpId)) {
-					
-					
+
 					// 로그인, 로그아웃 기록이 둘다 있으면 정상 로그이므로, pass
-					if(!tmpLogInDt.equals("") && !tmpLogOutDt.equals("") ){
+					if (!tmpLogInDt.equals("") && !tmpLogOutDt.equals("")) {
 						repLine = line;
 					}
-					
+
 					// 로그인, 로그아웃 둘다 없는 로그는 있을수 없으므로, Line 삭제
-					if(tmpLogInDt.equals("") && tmpLogOutDt.equals("")){
+					if (tmpLogInDt.equals("") && tmpLogOutDt.equals("")) {
 						repLine = "";
 					}
-					
+
 					// 로그아웃 기록만 있음. 있을수 없는 경우이므로, Line 삭제
-					if(!tmpLogInDt.equals("") && tmpLogOutDt.equals("")){
+					if (!tmpLogInDt.equals("") && tmpLogOutDt.equals("")) {
 						repLine = "";
 					}
-					
+
 					// 로그인은 있고, 로그아웃 기록이 없으면, 2중 로그인 된것 이므로 로그아웃 기록 Update 및 새로운 로그인 기록
-					if(!tmpLogInDt.equals("") && tmpLogOutDt.equals("")){
-						
+					if (!tmpLogInDt.equals("") && tmpLogOutDt.equals("")) {
 
 						StringBuilder sb = new StringBuilder();
 						sb.append(tmpId + ",");
 						sb.append(tmpIp + ",");
 						sb.append(tmpLogInDt + ",");
-						
+
 						repLine = sb.toString();
 					}
-					
+
 				} else {
-					
+
 					// 유저기록이 없는 Line 이므로, 전혀상관없는사람의 정보이니 건들지 않음.
 					repLine = line;
 				}
@@ -113,18 +110,16 @@ public class ValueIsNull {
 				bufferedWriter.write(repLine, 0, repLine.length());
 				bufferedWriter.newLine();
 			}
-			
-			
+
 			// 로그인 정보 작성
 			StringBuilder sb = new StringBuilder();
 			sb.append(userId + ",");
 			sb.append(userIp + ",");
 			sb.append("");
-			
-			
+
 			bufferedWriter.write(sb.toString(), 0, sb.toString().length());
 			bufferedWriter.newLine();
-			
+
 			// 정상적으로 수행되었음을 알리는 flag
 			result = true;
 		} catch (IOException ex) {
@@ -151,7 +146,7 @@ public class ValueIsNull {
 			}
 		}
 	}
-	
+
 	public void logOutWrite(String fileName, String userId, String userIp) {
 
 		// 원본파일경로
@@ -177,10 +172,8 @@ public class ValueIsNull {
 			fileInputStream = new FileInputStream(inputFile);
 			fileOutputStream = new FileOutputStream(outputFile);
 
-			bufferedReader = new BufferedReader(new InputStreamReader(
-					fileInputStream));
-			bufferedWriter = new BufferedWriter(new OutputStreamWriter(
-					fileOutputStream));
+			bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+			bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
 
 			// 원본 파일에서 읽어 들이는 한라인
 			String line;
@@ -244,5 +237,5 @@ public class ValueIsNull {
 		}
 
 	}
-	
+
 }

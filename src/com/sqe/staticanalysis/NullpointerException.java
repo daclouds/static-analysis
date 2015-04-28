@@ -5,29 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-
-
 public class NullpointerException {
 
 	private static final String NO_COLLECT_MESSAGE = "%s 서비스 %s 단말 데이터가 %s 분간 수집되지 않고 있습니다.";
 	private static final String NO_COLLECT_MESSAGE_WITHOUT_SERVICE_AND_DEVICE_NAME = "데이터가 %s 분간 수집되지 않고 있습니다.";
-	
+
 	private static final String DUMMY_LOG_SERVICE_NAME = "sqe-test";
 	private static final String LAST_INSERTED_LOG_KEY = "lastInsertedLog";
-	
-	
 
 	private Map<String, TestLoadingLog> lastInsertedLogKeep = new HashMap<String, TestLoadingLog>();
-	
-
 
 	private boolean useNotification;
 	private String messageTypeNoCollect;
 	private String sqeGroup;
 	private long termOfNoCollectMilliSeconds;
-	
-
-
 
 	public void notifyNoCollect(TestLoadingLog lastInsertedLog, long accumulatedMinutes) {
 		if (useNotification) {
@@ -39,7 +30,7 @@ public class NullpointerException {
 				Map<String, Object> requestMap = new HashMap<String, Object>();
 				Map<String, Object> groupInfo = new HashMap<String, Object>();
 				// requestMap.put("errorMessage", NO_COLLECT_MESSAGE);o
-				
+
 				if (lastInsertedLog == null) {
 					requestMap.put("errorMessage",
 							String.format(NO_COLLECT_MESSAGE_WITHOUT_SERVICE_AND_DEVICE_NAME, accumulatedMinutes));
@@ -72,7 +63,7 @@ public class NullpointerException {
 			}
 		}
 	}
-	
+
 	class TestLoadingLog {
 
 		public Date getActionDate() {
@@ -80,12 +71,10 @@ public class NullpointerException {
 		}
 
 		public String getDeviceName() {
-			// TODO Auto-generated method stub
 			return "DEVICE_NAME";
 		}
 
 		public String getServiceName() {
-			// TODO Auto-generated method stub
 			return "SERVICE_NAME";
 		}
 
